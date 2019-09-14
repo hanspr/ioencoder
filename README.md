@@ -1,4 +1,4 @@
-#Wrapper for text/encoding
+# Wrapper for text/encoding
 
 Allow to select correct encoder based on an encoder name
 
