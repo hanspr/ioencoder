@@ -214,7 +214,7 @@ func (e *IoEncoder) setEncoding(encodername string) error {
 		e.decoder = charmap.Macintosh.NewDecoder()
 		e.encoder = charmap.Macintosh.NewEncoder()
 	} else {
-		return errors.New("Unknownd encoding")
+		return errors.New("Unknown encoding")
 	}
 	return nil
 }
