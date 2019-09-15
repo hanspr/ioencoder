@@ -23,7 +23,7 @@ func main() {
     if wfile, err = os.OpenFile(name, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644); err == nil {
         writerutf8, err = enc.GetWriter("SHIFT-JIS", wfile)
         // Code to wrte to file encoded in SHIFT-JIS
-	}
+    }
 }
 
 ```
