@@ -18,7 +18,7 @@ func main() {
     // Code to read e Latin1 file and decode to UTF8
 
     // Decode a string
-	txtutf8 := enc.DecodeString("BIG5", "這裡，可算是我的隨意空間吧")
+    txtutf8 := enc.DecodeString("BIG5", "這裡，可算是我的隨意空間吧")
 
     if wfile, err = os.OpenFile(name, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644); err == nil {
         writerutf8, err = enc.GetWriter("SHIFT-JIS", wfile)
