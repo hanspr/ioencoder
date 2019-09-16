@@ -66,7 +66,7 @@ func (e *IoEncoder) GetAvailableEncodings() []string {
 }
 
 func (e *IoEncoder) DecodeBytes(encodername string, b []byte) []byte {
-	err := e.setEncoding(encodername)
+	err := e.SetEncoding(encodername)
 	if err == nil {
 		newb, err := e.decoder.Bytes(b)
 		if err == nil {
@@ -76,8 +76,30 @@ func (e *IoEncoder) DecodeBytes(encodername string, b []byte) []byte {
 	return b
 }
 
+func (e *IoEncoder) EncodeString(encodername, text string) string {
+	err := e.SetEncoding(encodername)
+	if err == nil {
+		newstr, err := e.encoder.String(text)
+		if err == nil {
+			return newstr
+		}
+	}
+	return text
+}
+
+func (e *IoEncoder) EncodeBytes(encodername string, b []byte) []byte {
+	err := e.SetEncoding(encodername)
+	if err == nil {
+		newb, err := e.encoder.Bytes(b)
+		if err == nil {
+			return newb
+		}
+	}
+	return b
+}
+
 func (e *IoEncoder) DecodeString(encodername, text string) string {
-	err := e.setEncoding(encodername)
+	err := e.SetEncoding(encodername)
 	if err == nil {
 		newstr, err := e.decoder.String(text)
 		if err == nil {
@@ -88,7 +110,7 @@ func (e *IoEncoder) DecodeString(encodername, text string) string {
 }
 
 func (e *IoEncoder) GetReader(encodername string, r io.Reader) (io.Reader, error) {
-	err := e.setEncoding(encodername)
+	err := e.SetEncoding(encodername)
 	if err == nil {
 		return e.decoder.Reader(r), nil
 	}
@@ -96,14 +118,17 @@ func (e *IoEncoder) GetReader(encodername string, r io.Reader) (io.Reader, error
 }
 
 func (e *IoEncoder) GetWriter(encodername string, w io.Writer) (io.Writer, error) {
-	err := e.setEncoding(encodername)
+	err := e.SetEncoding(encodername)
 	if err == nil {
 		return e.encoder.Writer(w), nil
 	}
 	return w, err
 }
 
-func (e *IoEncoder) setEncoding(encodername string) error {
+func (e *IoEncoder) SetEncoding(encodername string) error {
+	if e.encodername == encodername {
+		return nil
+	}
 	name := strings.ReplaceAll(strings.ToUpper(encodername), "-", "")
 	name = strings.ReplaceAll(name, "_", "")
 	e.encodername = encodername
