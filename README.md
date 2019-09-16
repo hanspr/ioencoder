@@ -44,6 +44,6 @@ func main() {
 
     // Use the selected encoder properties directly
     txtlatin1 := enc.encoder.String("latin1 string: áéíóúÑ")
-    txtutf8 := enco.decoder.String(txtlatin1)
+    txtutf8 := enc.decoder.String(txtlatin1)
 }
 ```
