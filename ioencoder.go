@@ -128,10 +128,10 @@ func (e *IoEncoder) GetWriter(encodername string, w io.Writer) (io.Writer, error
 func (e *IoEncoder) SetEncoding(encodername string) error {
 	name := strings.ReplaceAll(strings.ToUpper(encodername), "-", "")
 	name = strings.ReplaceAll(name, "_", "")
-	if e.encodername == encodername {
+	if e.encodername == name {
 		return nil
 	}
-	e.encodername = encodername
+	e.encodername = name
 
 	if name == "ISO88591" {
 		e.decoder = charmap.ISO8859_1.NewDecoder()
