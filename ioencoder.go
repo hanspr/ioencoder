@@ -126,11 +126,11 @@ func (e *IoEncoder) GetWriter(encodername string, w io.Writer) (io.Writer, error
 }
 
 func (e *IoEncoder) SetEncoding(encodername string) error {
+	name := strings.ReplaceAll(strings.ToUpper(encodername), "-", "")
+	name = strings.ReplaceAll(name, "_", "")
 	if e.encodername == encodername {
 		return nil
 	}
-	name := strings.ReplaceAll(strings.ToUpper(encodername), "-", "")
-	name = strings.ReplaceAll(name, "_", "")
 	e.encodername = encodername
 
 	if name == "ISO88591" {
